@@ -3,9 +3,17 @@ name = "rantier"
 version = "0.1.0"
 description = ""
 authors = ["egor187 <py.egor.py@gmail.com>"]
+packages = [
+    { include = "Rantier" },
+    { include = "users" },
+    { include = "contracts" },
+    { include = "payments" },
+]
 
 [tool.poetry.dependencies]
 python = "^3.9"
+Django = "^3.1.7"
+python-dotenv = "^0.15.0"
 
 [tool.poetry.dev-dependencies]
 
