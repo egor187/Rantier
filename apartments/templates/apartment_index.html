@@ -1,0 +1,45 @@
+{% load bootstrap4 %}
+
+<html xmlns="http://www.w3.org/1999/html">
+  <body class="text-center">
+  <span>
+  {% if user.is_authenticated %}
+    <div class="nav-link">Пользователь: {{ user }}</div>
+  {% endif %}
+  </span>
+
+  {% block message %}
+      {% bootstrap_messages %}
+  {% endblock message %}
+
+  {% if user.is_authenticated %}
+      <a class="nav-link" href={% url 'users:logout' %}>Logout</a>
+          <h1>Apartments</h1>
+		<table border="3" align="center" class="h-auto mb-4" cellpadding="7">
+			<tr>
+				<th>Apartment ID</th>
+				<th>Address</th>
+				<th>Owner</th>
+				<th>Size (m2)</th>
+				<th>Current tenant</th>
+			</tr>
+			{% for apartment in apartments_list %}
+                <tr>
+                    <td><div>{{ apartment.id }}</div></td>
+                    <td><a href={% url 'apartments:apartment_detail' apartment.pk %}>{{ apartment.address }}</a></td>
+                    <td><a href={% url 'users:user_detail' user.id %}>{{ apartment.owner }}</a></td>
+                    <td><div>{{ apartment.size }}</div></td>
+                    <td><div>{{ apartment.current_tenant }}</div></td>
+                </tr>
+			{% endfor %}
+		</table>
+
+  <a href={% url 'apartments:apartment_create' %}>Зарегистрировать новые апартаменты</a>
+
+  {%  elif not user.is_authenticated %}
+      <a class="nav-link" href={% url 'users:login' %}>Login</a>
+      <br>
+      <a class="nav-link" href={% url 'users:user_create' %}>Регистрация</a>
+  {% endif %}
+  </body>
+</html>

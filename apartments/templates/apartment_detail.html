@@ -1,0 +1,30 @@
+{% load bootstrap4 %}
+
+
+{% if bootstrap_messages %}
+	{% block message %}
+		{% bootstrap_javascript jquery=True %}
+        {% bootstrap_messages %}
+	{% endblock message %}
+{% endif %}
+
+<body class="text-center">
+    <table border="3" align="center" class="h-auto mb-4" cellpadding="7">
+        <tr>
+            <th>Apartment ID</th>
+            <th>Address</th>
+            <th>Owner</th>
+            <th>Size (m2)</th>
+            <th>Current tenant</th>
+        </tr>
+        <tr>
+            <td><div>{{ apartment.id }}</div></td>
+            <td><a href={% url 'apartments:apartment_detail' apartment.pk %}>{{ apartment.address }}</a></td>
+            <td><a href={% url 'users:user_detail' user.id %}>{{ apartment.owner }}</a></td>
+            <td><div>{{ apartment.size }}</div></td>
+            <td><div>{{ apartment.current_tenant }}</div></td>
+        </tr>
+    </table>
+
+<a href={% url 'apartments:apartment_update' apartment.id %}> Update </a>
+</body>
