@@ -1,0 +1,47 @@
+{% load bootstrap4 %}
+
+<html>
+  <body class="text-center">
+  <span>
+  {% if user.is_authenticated %}
+    <div class="nav-link">Пользователь: {{ user }}</div>
+  {% endif %}
+  </span>
+
+  {% block message %}
+      {% bootstrap_messages %}
+  {% endblock message %}
+
+  {% if user.is_authenticated %}
+      <a class="nav-link" href={% url 'users:logout' %}>Logout</a>
+          <h1>Rantiers</h1>
+		<table border="3" align="center" class="h-auto mb-4" cellpadding="7">
+			<tr>
+				<th>Rantier ID</th>
+				<th>Name</th>
+				<th>Apartments</th>
+			</tr>
+			{% for rantier in rantier_list %}
+				<tr>
+					<td><div>{{ rantier.id }}</div></td>
+					<td> {% if user.id == rantier.id %} <a href={% url 'users:user_detail' rantier.id %}> {{ rantier }} </a> {% else %} <p> {{ rantier }} </p> {% endif %} </td>
+					<td>
+						{% for apartment in rantier.apartments_set.all %}
+							<p>
+								<a href=#>{{ forloop.counter }}. {{ apartment }}</a>
+							</p>
+						{% endfor %}
+					</td>
+				</tr>
+			{% endfor %}
+		</table>
+
+  <a class="nav-link" href={% url 'apartments:apartment_index' %}>Apartments</a>
+
+  {%  elif not user.is_authenticated %}
+      <a class="nav-link" href={% url 'users:login' %}>Login</a>
+      <br>
+      <a class="nav-link" href={% url 'users:user_create' %}>Регистрация</a>
+  {% endif %}
+  </body>
+</html>

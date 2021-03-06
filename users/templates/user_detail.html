@@ -1,0 +1,55 @@
+{% load bootstrap4 %}
+
+
+{% if bootstrap_messages %}
+	{% block message %}
+		{% bootstrap_javascript jquery=True %}
+        {% bootstrap_messages %}
+	{% endblock message %}
+{% endif %}
+
+<body class="text-center">
+<table border="2" align="center" class="row h-auto mb-4" cellpadding="7">
+	<tr>
+		<th>User ID</th>
+		<th>Nickname </th>
+		<th>Name</th>
+		<th>E-mail</th>
+		<th>Apartments</th>
+		<th>Tenants</th>
+		<th>Rent</th>
+	</tr>
+		<tr>
+			<td><span>{{ rantier.id }}</span></td>
+			<td><span>{{ rantier.username }}</span></td>
+			<td><span>{{ rantier }}</span></td>
+			<td><span>{{ rantier.email }}</span></td>
+			<td>
+				{% for apartment in rantier.apartments_set.all %}
+					<p>
+						<span>{{ forloop.counter }}. {{ apartment }}</span>
+					</p>
+				{% endfor %}
+			</td>
+			<td>
+				{% for apartments in rantier.apartments_set.all %}
+					<p>
+						<span>{{ apartments.current_tenant }}</span>
+					</p>
+				{% endfor %}
+			</td>
+			<td>
+				{% for apart in rantier.apartments_set.all %}
+					{% for payment in apart.payments_set.all %}
+						<p>
+							{{ payment.rent_payment }}
+						</p>
+					{% endfor %}
+
+				{% endfor %}
+			</td>
+		</tr>
+</table>
+
+<a href={% url 'users:user_update' user.id %}> Update </a>
+</body>
