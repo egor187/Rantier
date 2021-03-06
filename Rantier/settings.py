@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'apartments',
     'contracts',
     'payments',
+    'tenants',
+    'bootstrap4'
 ]
 
 MIDDLEWARE = [
@@ -110,6 +112,11 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 AUTH_USER_MODEL = 'users.CustomUser'
+
+LOGIN_URL = 'users:login'
+LOGIN_REDIRECT_URL = 'users:user_index'
+LOGOUT_REDIRECT_URL = 'users:user_index'
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
