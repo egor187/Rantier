@@ -10,4 +10,4 @@ class CustomUser(AbstractUser):
         return self.get_full_name()
 
     def get_absolute_url(self):
-        return reverse('users.views.CustomUserDetailView', args=[str(self.id)])
+        return reverse('users:user_detail', args=[str(self.pk)])
