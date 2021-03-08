@@ -18,6 +18,7 @@
 		<th>Apartments</th>
 		<th>Tenants</th>
 		<th>Rent</th>
+		<th>Contracts</th>
 	</tr>
 		<tr>
 			<td><span>{{ rantier.id }}</span></td>
@@ -46,6 +47,11 @@
 						</p>
 					{% endfor %}
 
+				{% endfor %}
+			</td>
+			<td>
+				{% for elem in contract %}
+					{{ elem }}
 				{% endfor %}
 			</td>
 		</tr>
