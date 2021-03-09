@@ -48,3 +48,5 @@ class ApartmentsCreateView(LoginRequiredMixin, CreateView):
 
 class ApartmentsDeleteView(DeleteView):
     model = Apartments
+    context_object_name = 'apartment'
+    template_name = 'apartment_delete.html'
