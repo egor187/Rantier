@@ -1,11 +1,8 @@
-from django.shortcuts import render
-from django.urls import reverse_lazy, reverse
+from django.urls import reverse_lazy
 from users.models import CustomUser
 from contracts.models import Contracts
 from django.contrib import messages
 from django.shortcuts import redirect
-from apartments.models import Apartments
-from payments.models import Payments
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -29,7 +26,7 @@ class CustomUserDetailView(LoginRequiredMixin, DetailView):
         """
         Prohibit access to another rantiers detail page
         """
-        if self.request.user.pk != kwargs['pk']:
+        if self.request.user.pk != self.kwargs['pk']:
             messages.error(request, self.not_allowed_message)
             return redirect(self.redirect_url)
         return super().dispatch(request, *args, **kwargs)
