@@ -1,0 +1,39 @@
+{% load bootstrap4 %}
+
+
+{% if bootstrap_messages %}
+	{% block message %}
+		{% bootstrap_javascript jquery=True %}
+        {% bootstrap_messages %}
+	{% endblock message %}
+{% endif %}
+
+<body class="text-center">
+    <table border="3" align="center" class="h-auto mb-4" cellpadding="7">
+        <tr>
+            <th>Contract id</th>
+            <th>Apartment address</th>
+            <th>Owner</th>
+            <th>Tenant</th>
+            <th>Concluded at</th>
+            <th>Expiration date</th>
+            <th>Cost</th>
+            <th>Payments</th>
+        </tr>
+        <tr>
+            <td><div>{{ contract.id }}</div></td>
+            <td><div>{{ contract.apartment.address }}</div></td>
+            <td><a href={% url 'users:user_detail' user.id %}>{{ contract.apartment.owner }}</a></td>
+            <td><div>{{ contract.tenant }}</div></td>
+            <td><div>{{ contract.concluded_at }}</div></td>
+            <td><div>{{ contract.expiration_date }}</div></td>
+            <td><div>{{ contract.cost }}</div></td>
+            <td>
+                {% for payment in contract.payments_set.all %}
+                    <a href={% url 'payments:payment_detail' payment.id %}>{{ payment.description }}. Created at: {{ payment.created_at }}</a>
+                {% endfor %}
+            </td>
+        </tr>
+    </table>
+
+</body>

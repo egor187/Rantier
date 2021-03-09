@@ -1,0 +1,33 @@
+{% load bootstrap4 %}
+
+
+{% if bootstrap_messages %}
+	{% block message %}
+		{% bootstrap_javascript jquery=True %}
+        {% bootstrap_messages %}
+	{% endblock message %}
+{% endif %}
+
+<body class="text-center">
+    <table border="3" align="center" class="h-auto mb-4" cellpadding="7">
+        <tr>
+            <th>Contract</th>
+            <th>Description</th>
+            <th>Owner/recipient</th>
+            <th>Tenant/payer</th>
+            <th>Created at</th>
+            <th>Updated at</th>
+            <th>Rent payment</th>
+        </tr>
+        <tr>
+            <td><div>{{ payment.contract}}</div></td>
+            <td><div>{{ payment.description}}</div></td>
+            <td><div>{{ payment.contract.apartment.owner}}</div></td>
+            <td><div>{{ payment.contract.tenant}}</div></td>
+            <td><div>{{ payment.created_at}}</div></td>
+            <td><div>{{ payment.updated_at}}</div></td>
+            <td><div>{{ payment.rent_payment}}</div></td>
+        </tr>
+    </table>
+
+</body>

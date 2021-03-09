@@ -1,0 +1,26 @@
+{% load bootstrap4 %}
+
+{% if bootstrap_messages %}
+	{% block message %}
+        {% bootstrap_messages %}
+	{% endblock message %}
+{% endif %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Deletion tenant profile</title>
+</head>
+<body>
+    <h2>DELETE TENANT PROFILE</h2>
+    <form method="post" action="{% url 'tenants:tenant_delete' tenant.pk %}">
+        {% csrf_token %}
+        <p class="badge badge-danger badge-pill p-2">"Are you sure want to delete account for tenant: "{{ tenant }}"?</p>
+        <div class="form-group">
+            <input class="btn btn-danger" type="submit" value="Yes, delete">
+            <a class="btn btn-info" href={% url 'tenants:tenant_detail' tenant.pk %}>No, I've changed my mind</a>
+        </div>
+    </form>
+</body>
+</html>

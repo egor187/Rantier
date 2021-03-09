@@ -14,22 +14,23 @@
 
   {% if user.is_authenticated %}
       <a class="nav-link" href={% url 'users:logout' %}>Logout</a>
-          <h1>Apartments</h1>
+          <h1>Tenants</h1>
 		<table border="3" align="center" class="h-auto mb-4" cellpadding="7">
 			<tr>
-				<th>Apartment ID</th>
-				<th>Address</th>
-
+				<th>Tenant ID</th>
+				<th>Name</th>
+				<th>Email</th>
 			</tr>
-			{% for apartment in apartments_list %}
+			{% for tenant in tenants %}
                 <tr>
-                    <td><div>{{ apartment.id }}</div></td>
-                    <td><a href={% url 'apartments:apartment_detail' apartment.pk %}>{{ apartment.address }}</a></td>
+                    <td><div>{{ tenant.id }}</div></td>
+                    <td><a href={% url 'tenants:tenant_detail' tenant.id %}>{{ tenant }}</a></td>
+                    <td><div>{{ tenant.email }}</div></td>
                 </tr>
 			{% endfor %}
 		</table>
 
-  <a href={% url 'apartments:apartment_create' %}>Зарегистрировать новые апартаменты</a>
+  <a href={% url 'tenants:tenant_create' %}>Зарегистрировать нового арендатора</a>
 
   {%  elif not user.is_authenticated %}
       <a class="nav-link" href={% url 'users:login' %}>Login</a>

@@ -1,0 +1,35 @@
+{% load bootstrap4 %}
+
+{% if bootstrap_messages %}
+	{% block message %}
+		{% bootstrap_javascript jquery=True %}
+        {% bootstrap_messages %}
+	{% endblock message %}
+{% endif %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+    <title>Tenant registration</title>
+
+
+  </head>
+
+  <body class="text-center">
+  <h1>
+      NEW TENANT REGISTRATION
+  </h1>
+
+    <form class="form-signin" method="post" action={% url "tenants:tenant_create" %}>
+    {% csrf_token %}
+        {% bootstrap_form form %}
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Зарегистрировать</button>
+    </form>
+  </body>
+</html>
