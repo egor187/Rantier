@@ -5,7 +5,7 @@ from tenants.models import Tenants
 
 
 class Contracts(models.Model):
-    apartment = models.ForeignKey(Apartments, on_delete=models.CASCADE, related_name='apartment')
+    apartment = models.ForeignKey(Apartments, on_delete=models.CASCADE, related_name='contracts')
     concluded_at = models.DateField(auto_now_add=True)
     expiration_date = models.DateField()
     cost = models.IntegerField()
