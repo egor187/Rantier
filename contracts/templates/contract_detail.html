@@ -30,7 +30,9 @@
             <td><div>{{ contract.cost }}</div></td>
             <td>
                 {% for payment in contract.payments_set.all %}
-                    <a href={% url 'payments:payment_detail' payment.id %}>{{ payment.description }}. Created at: {{ payment.created_at }}</a>
+                    <p>
+                        <a href={% url 'payments:payment_detail' payment.id %}>{{ payment.description }}. Created at: {{ payment.created_at }}</a>
+                    </p>
                 {% endfor %}
             </td>
         </tr>
